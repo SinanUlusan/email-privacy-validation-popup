@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Bültenine Kayıt Ol</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        $(document).ready(function() { 
+            
+            $('.btn').click(function() {  
+
+            var hasError = false;
+            var popup = $(".content");
+            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var emailblockReg = /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)([\w-]+\.)+[\w-]{2,4})?$/;
+            var emailaddressVal = $("#email").val();
+            if(emailaddressVal == '') {
+                $("#conf").html('Please enter your email address.');
+                hasError = true;
+            }
+
+            else if(!emailReg.test(emailaddressVal)) {
+                $("#conf").html('Enter a valid email address.');
+                hasError = true;
+            }
+
+            else if(!emailblockReg.test(emailaddressVal)) {
+                $("#conf").html('No yahoo, gmail emails.');
+                hasError = true
+            }else {
+                $("#conf").html('');
+                $(".content").css("display","none")
+                $("body").css("background","darkslateblue");
+            }
+
+            
+
+        });
+
+        $('.btn').click(function(){
+            var checkbox = $("#checkbox");
+
+            if(checkbox.prop('checked')==true) {
+                $("#sec").html("")
+            }else {
+                $("#sec").html("click checkbox.")
+            }
+        });
+    });
+    </script>
+    <style>
+        #conf {
+            font-size: 12px;
+            color: red;
+        }
+        #sec {
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="close"></div>
+            <div class="imgBox">
+                <img src="./img/ncodas-logo.png" alt="#" width="300">
+            </div>
+            <h2>Email Bültenimize Kayıt Ol</h2>
+            <p>Yeniliklerden ilk sen haberdar ol!</p>
+            <input type="email" name="email" id="email" placeholder="Email adresi giriniz.">
+            <div id="conf"></div>
+            <div class="form">
+                <input type="checkbox" name="checkbox" id="checkbox">
+                <span><a href="#">Gizlilik sözleşmesini okudum, kabul ediyorum.</a></span>
+            </div>
+            <div id="sec"></div>
+            <button type="submit" id="#btn-submit" class="btn">Kayıt Ol</button>
+        </div>
+    </div>
+
+    <script>
+        
+        const popup = document.querySelector('.content');
+        const close = document.querySelector('.close');
+        const btn = document.querySelector('.btn');
+        const body = document.querySelector('body');
+
+        window.onload = function (){
+            setTimeout(function(){
+                popup.style.display = "block",
+                body.style.background="rgba(0,0,0,0.5)"
+
+                // Time delay
+            }, 2000)
+        }
+
+        close.addEventListener('click', () => {
+            popup.style.display = "none",
+            body.style.background="darkslateblue"
+        })
+    
+    
+    </script>
+</body>
+</html>
