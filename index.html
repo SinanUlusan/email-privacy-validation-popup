@@ -18,6 +18,7 @@
             var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
             var emailblockReg = /^([\w-\.]+@(?!gmail.com)(?!yahoo.com)([\w-]+\.)+[\w-]{2,4})?$/;
             var emailaddressVal = $("#email").val();
+            var checkbox = $("#checkbox");
             if(emailaddressVal == '') {
                 $("#conf").html('Please enter your email address.');
                 hasError = true;
@@ -30,8 +31,15 @@
 
             else if(!emailblockReg.test(emailaddressVal)) {
                 $("#conf").html('No yahoo, gmail emails.');
-                hasError = true
-            }else {
+                hasError = true;
+            }
+
+            else if (checkbox.prop('checked')!=true) {
+                $("#sec").html("click checkbox.")
+                hasError = true;
+            }
+            
+            else if(checkbox.prop('checked')==true && emailReg.test(emailaddressVal) && emailblockReg.test(emailaddressVal) && emailaddressVal != ''){
                 $("#conf").html('');
                 $(".content").css("display","none")
                 $("body").css("background","darkslateblue");
@@ -41,15 +49,6 @@
 
         });
 
-        $('.btn').click(function(){
-            var checkbox = $("#checkbox");
-
-            if(checkbox.prop('checked')==true) {
-                $("#sec").html("")
-            }else {
-                $("#sec").html("click checkbox.")
-            }
-        });
     });
     </script>
     <style>
